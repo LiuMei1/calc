@@ -7,6 +7,8 @@ import java.awt.GridLayout;
 import java.awt.HeadlessException;
 import java.awt.Label;
 import java.awt.peer.LabelPeer;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -21,7 +23,7 @@ import javax.swing.border.EmptyBorder;
  * @author LiuMei
  *
  */
-public class CalcFrame extends JFrame // implements CalcCallback
+public class CalcFrame extends JFrame implements Observer// implements CalcCallback
 {
 
 	
@@ -102,6 +104,18 @@ public class CalcFrame extends JFrame // implements CalcCallback
 			}
 		}
 
+	}
+
+	/**
+	 * 模型更新视图（回调）
+	 * @param o
+	 * @param arg
+	 */
+	@Override
+	public void update(Observable o, Object arg) {
+
+		String result = (String) arg;
+		labelresult.setText(result);
 	}
 
 	/**

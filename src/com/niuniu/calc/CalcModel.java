@@ -1,14 +1,17 @@
 package com.niuniu.calc;
 
+import java.util.Observable;
 import java.util.Stack;
 
 /**
  * 计算器的模型（Model）
  * 
+ * 模型中的数据
+ * 
  * @author LiuMei
  *
  */
-public class CalcModel {
+public class CalcModel extends Observable{
 
 	// 逆波兰表达式（后序表达式）
 	// 操作数和运算符
@@ -25,6 +28,10 @@ public class CalcModel {
 		stack.push(e);
 
 		System.out.println(stack);
+		
+		//数据改变了，通知观察者
+		setChanged();
+		notifyObservers(stack.toString());
 	}
 
 	/**
@@ -47,5 +54,7 @@ public class CalcModel {
 	public String toString() {
 		return "Calc [" + (stack != null ? "stack=" + stack : "") + "]";
 	}
+
+	
 
 }

@@ -14,6 +14,9 @@ public class App {
 
 		// 视图
 		CalcFrame view = new CalcFrame(controller);
+		
+		//订阅（添加观察者）
+		model.addObserver(view);
 
 		// 装配 （依赖关系）
 		// 解决组件之间的依赖问题： 1）构造方法注入 2）setter方法注入依赖的组件

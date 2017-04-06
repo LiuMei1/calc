@@ -16,18 +16,12 @@ public class Controller implements ActionListener {
 	 */
 	private CalcModel model;
 
-	private CalcCallback callback;
-
 	private StringBuilder input = new StringBuilder();
 
-	public Controller(CalcModel calc, CalcCallback callback) {
-		super();
-		this.model = calc;
-		this.callback = callback;
-	}
+	
 
 	public Controller() {
-		// TODO 自动生成的构造函数存根
+		super();
 	}
 
 	@Override
@@ -41,8 +35,8 @@ public class Controller implements ActionListener {
 		case "-":
 		case "*":
 		case "/":
-			model.push(input.toString());
-			input.delete(0, input.length());
+//			model.push(input.toString());
+//			input.delete(0, input.length());
 			model.push(command);
 			break;
 		case "Del":
@@ -55,6 +49,8 @@ public class Controller implements ActionListener {
 			break;
 		default:
 			input.append(command);
+			model.push(input.toString());
+			input.delete(0, input.length());
 		}
 
 //		callback.showInput();
@@ -62,7 +58,7 @@ public class Controller implements ActionListener {
 	}
 
 	/**
-	 * 
+	 * 模型更新视图  
 	 * @param model
 	 */
 	public void setModel(CalcModel model) {
