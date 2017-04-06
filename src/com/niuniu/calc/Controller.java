@@ -35,8 +35,8 @@ public class Controller implements ActionListener {
 		case "-":
 		case "*":
 		case "/":
-//			model.push(input.toString());
-//			input.delete(0, input.length());
+			model.push(input.toString());
+			input.delete(0, input.length());
 			model.push(command);
 			break;
 		case "Del":
@@ -45,20 +45,22 @@ public class Controller implements ActionListener {
 			model.clear();
 			break;
 		case "=":
+			model.todo();
 			// callback.showResult();
 			break;
 		default:
 			input.append(command);
-			model.push(input.toString());
-			input.delete(0, input.length());
+//			model.push(input.toString());
+//			input.delete(0, input.length());
 		}
+		
 
 //		callback.showInput();
 
 	}
 
 	/**
-	 * 模型更新视图  
+	 *设置控制器依赖的模式
 	 * @param model
 	 */
 	public void setModel(CalcModel model) {

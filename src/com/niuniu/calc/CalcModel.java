@@ -6,7 +6,7 @@ import java.util.Stack;
 /**
  * 计算器的模型（Model）
  * 
- * 模型中的数据
+ * 模型中的数据发布出去（）
  * 
  * @author LiuMei
  *
@@ -53,6 +53,14 @@ public class CalcModel extends Observable{
 	@Override
 	public String toString() {
 		return "Calc [" + (stack != null ? "stack=" + stack : "") + "]";
+	}
+
+	public void todo() {
+		// TODO 自动生成的方法存根
+		//运算
+		//通知视图更新
+		notifyObservers("数据");
+		
 	}
 
 	
