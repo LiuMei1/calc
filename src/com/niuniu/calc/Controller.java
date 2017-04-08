@@ -15,6 +15,8 @@ public class Controller implements ActionListener {
 	 * 计算器的核心
 	 */
 	private CalcModel model;
+	
+	
 
 	private StringBuilder input = new StringBuilder();
 
@@ -29,27 +31,33 @@ public class Controller implements ActionListener {
 		String command = e.getActionCommand();
 		// System.out.println(command);
 
+		input.append(command);
 		switch (command) {
 		case "%":
 		case "+":
 		case "-":
 		case "*":
 		case "/":
-			model.push(input.toString());
-			input.delete(0, input.length());
+//			model.push(input.toString());
+//			input.delete(0, input.length());
 			model.push(command);
 			break;
 		case "Del":
+			model.delete();
 			break;
 		case "C":
 			model.clear();
+			input.delete(0, input.length());
 			break;
 		case "=":
+			model.setInput(input.toString());
+			input.setLength(0);
 			model.todo();
 			// callback.showResult();
 			break;
 		default:
-			input.append(command);
+			model.push(command);
+//			input.append(command);
 //			model.push(input.toString());
 //			input.delete(0, input.length());
 		}

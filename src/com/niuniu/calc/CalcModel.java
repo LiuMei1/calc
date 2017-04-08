@@ -16,6 +16,11 @@ public class CalcModel extends Observable{
 	// 逆波兰表达式（后序表达式）
 	// 操作数和运算符
 	Stack<String> stack;
+	
+	private String input;
+	
+	Todo do1;
+	
 
 	/**
 	 * 计算器
@@ -39,6 +44,8 @@ public class CalcModel extends Observable{
 	 */
 	public void clear() {
 		stack.clear();
+		setChanged();
+		notifyObservers(stack.toString());
 	}
 
 	/**
@@ -50,16 +57,44 @@ public class CalcModel extends Observable{
 		return stack.toString();
 	}
 
+	
+
+	
+
 	@Override
 	public String toString() {
-		return "Calc [" + (stack != null ? "stack=" + stack : "") + "]";
+		return "CalcModel " + (stack != null ? "stack=" + stack : "");
 	}
 
 	public void todo() {
-		// TODO 自动生成的方法存根
 		//运算
 		//通知视图更新
-		notifyObservers("数据");
+		//
+		do1 = new Todo(input);
+		String result = do1.countExpression();
+		
+		
+		notifyObservers(result);
+		
+	}
+
+	public void delete() {
+		if(!stack.isEmpty()){
+			int index = stack.size() - 1;
+			stack.remove(index);
+			setChanged();
+			notifyObservers(stack.toString());
+		}
+		
+	}
+
+	public void setInput(String command) {
+		
+		input = command;
+		System.out.println(input);
+		
+		setChanged();
+		notifyObservers(input);
 		
 	}
 
