@@ -36,7 +36,7 @@ public class CalcModel extends Observable{
 //		stack.push(e);
 		sb.append(e);
 
-		System.out.println(sb.toString());
+//		System.out.println(sb.toString());
 		
 		//数据改变了，通知观察者
 		setChanged();
