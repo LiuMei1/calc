@@ -15,37 +15,42 @@ public class CalcModel extends Observable{
 
 	// 逆波兰表达式（后序表达式）
 	// 操作数和运算符
-	Stack<String> stack;
+//	Stack<String> stack;
+	
+	StringBuilder sb;
 	
 	private String input;
 	
-	Todo do1;
+	Todo2 do1;
 	
 
 	/**
 	 * 计算器
 	 */
 	public CalcModel() {
-		stack = new Stack<String>();
+//		stack = new Stack<String>();
+		sb = new StringBuilder();
 	}
 
 	public void push(String e) {
-		stack.push(e);
+//		stack.push(e);
+		sb.append(e);
 
-		System.out.println(stack);
+		System.out.println(sb.toString());
 		
 		//数据改变了，通知观察者
 		setChanged();
-		notifyObservers(stack.toString());
+		notifyObservers(sb.toString());
 	}
 
 	/**
 	 * 清空
 	 */
 	public void clear() {
-		stack.clear();
+//		stack.clear();
+		sb.setLength(0);
 		setChanged();
-		notifyObservers(stack.toString());
+		notifyObservers(sb.toString());
 	}
 
 	/**
@@ -54,49 +59,47 @@ public class CalcModel extends Observable{
 	 * @return
 	 */
 	public String result() {
-		return stack.toString();
-	}
-
-	
-
-	
-
-	@Override
-	public String toString() {
-		return "CalcModel " + (stack != null ? "stack=" + stack : "");
+		return sb.toString();
 	}
 
 	public void todo() {
 		//运算
 		//通知视图更新
 		//
-		do1 = new Todo(input);
+		System.out.println(sb.toString());
+		do1 = new Todo2(sb.toString());
 		String result = do1.countExpression();
 		
-		
+		setChanged();
 		notifyObservers(result);
-		
+		sb.setLength(0);
 	}
 
 	public void delete() {
-		if(!stack.isEmpty()){
-			int index = stack.size() - 1;
-			stack.remove(index);
+//		if(!stack.isEmpty()){
+//			int index = stack.size() - 1;
+//			stack.remove(index);
+//			setChanged();
+//			notifyObservers(stack.toString());
+//		}
+		if (!(sb.length()==0)) {
+			int index = sb.length()-1;
+			sb.deleteCharAt(index);
 			setChanged();
-			notifyObservers(stack.toString());
+			notifyObservers(sb.toString());
 		}
 		
 	}
 
-	public void setInput(String command) {
-		
-		input = command;
-		System.out.println(input);
-		
-		setChanged();
-		notifyObservers(input);
-		
-	}
+//	public void setInput(String command) {
+//		
+//		input = command;
+//		System.out.println(input);
+//		
+//		setChanged();
+//		notifyObservers(input);
+//		
+//	}
 
 	
 

@@ -18,7 +18,7 @@ public class Controller implements ActionListener {
 	
 	
 
-	private StringBuilder input = new StringBuilder();
+//	private StringBuilder input = new StringBuilder();
 
 	
 
@@ -31,7 +31,7 @@ public class Controller implements ActionListener {
 		String command = e.getActionCommand();
 		// System.out.println(command);
 
-		input.append(command);
+//		input.append(command);
 		switch (command) {
 		case "%":
 		case "+":
@@ -47,11 +47,11 @@ public class Controller implements ActionListener {
 			break;
 		case "C":
 			model.clear();
-			input.delete(0, input.length());
+//			input.delete(0, input.length());
 			break;
 		case "=":
-			model.setInput(input.toString());
-			input.setLength(0);
+//			model.setInput(input.toString());
+//			input.setLength(0);
 			model.todo();
 			// callback.showResult();
 			break;

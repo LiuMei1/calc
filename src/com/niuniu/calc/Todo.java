@@ -11,7 +11,7 @@ public class Todo {
 	// 表达式字符串
 	String expression = null;
 	
-	private Pattern patten = Pattern.compile("//d//.?//d?");
+	private Pattern patten = Pattern.compile("\\d\\.?\\d?");
 
 	// 操作数一
 	double figureOne = 0;
@@ -39,6 +39,7 @@ public class Todo {
 		char currentChar;
 
 		int n = expression.length();
+//		System.out.println(n);
 		if (n == 0) {
 			System.out.println("表达式不能为空！");
 		}
@@ -46,6 +47,7 @@ public class Todo {
 		// 表达式不为空，进行计算
 		while (currentIndex <= n - 1) {
 			currentChar = expression.charAt(currentIndex);
+//			System.out.println(currentChar);
 			// 如果表达式为数字，索引自加
 			if (Character.isDigit(currentChar) || currentChar == '.') {
 				currentIndex++;
@@ -54,35 +56,48 @@ public class Todo {
 				if (currentIndex == 0) {
 
 					System.out.println("表达式不正确！！");
+					break;
 				}
 				// 表达式不为数字
 
 				// 将数字传入栈中
 				// 栈为空，传入数字
+//				System.out.println(currentIndex);
+//				System.out.println(expression
+//							.substring(lastIndex,currentIndex));
+//				System.out.println("stack.empty():"+stack.empty());
+				
 				if (stack.empty()) {
 					stack.push(expression
-							.substring(lastIndex, currentIndex - 1));
-					lastIndex = currentIndex - 1;
+							.substring(lastIndex,currentIndex ));
+					System.out.println(stack.peek());
+					lastIndex = currentIndex;
 				} else if (!isNum(stack.peek())) {
 					// 栈顶为符号，拿出符号传入数字
 					String st = stack.pop();
 					stack.push(expression
-							.substring(lastIndex, currentIndex - 1));
-					lastIndex = currentIndex - 1;
+							.substring(lastIndex, currentIndex));
+					System.out.println(stack.peek());
+					lastIndex = currentIndex;
 					stack.push(st);
+					System.out.println(stack.peek());
 				} else {
 					// 栈顶不为符号，传入数字
 
 					stack.push(expression
-							.substring(lastIndex, currentIndex - 1));
-					lastIndex = currentIndex - 1;
+							.substring(lastIndex, currentIndex));
+//					System.out.println(stack.peek());
+					lastIndex = currentIndex;
 				}
 
 				// ***************************************************************
 
 				// 如果栈顶为数字，直接将符号传入
+//				System.out.println("isNum: "+isNum(stack.peek()));
 				if (isNum(stack.peek())) {
-					stack.push(expression.substring(lastIndex, currentIndex));
+//					System.out.println(currentChar);
+					stack.push(String.valueOf(currentChar));
+					System.out.println(stack.peek());
 				} else {
 					//判断栈顶符号
 					switch (currentChar) {
@@ -100,8 +115,6 @@ public class Todo {
 						break;
 					case '%':
 						break;
-					case '=':
-						handleAddAndSubtract("=");
 						
 					}
 				}
@@ -109,9 +122,11 @@ public class Todo {
 				currentIndex = currentIndex + 1;
 
 			}
+			
 		}
 
 		result = stack.pop();
+		System.out.println(result);
 		stack.clear();
 		return result;
 	}
@@ -119,8 +134,8 @@ public class Todo {
 	private void handleAddAndSubtract(String c) {
 
 		String st = stack.peek();
-		figureOne = 7;//Double.valueOf(stack.peek());
-		figureTwo =8;// Double.valueOf(stack.peek());
+		figureOne = Double.valueOf(stack.peek());
+		figureTwo = Double.valueOf(stack.peek());
 		switch (st) {
 		case "+":
 			figureT = figureOne + figureTwo;
