@@ -22,7 +22,7 @@ public class Todo2 {
 	// 一个随机当做参数的字符
 	char randomChar;
 
-	StringBuilder sb = new StringBuilder();
+//	StringBuilder sb = new StringBuilder();
 
 	public Todo2(String expression) {
 
@@ -77,7 +77,7 @@ public class Todo2 {
 //						stack.push(st2);
 					}
 				}
-				sb.append(st);
+//				sb.append(st);
 			} else {
 				// 如果是字符
 
@@ -88,7 +88,7 @@ public class Todo2 {
 						// 栈顶为数字时
 						st = String.valueOf(currentChar);
 						stack.push(st);
-						sb.append(st);
+//						sb.append(st);
 					} else {
 						handleAddAndSubtract("+");
 					}
@@ -98,7 +98,7 @@ public class Todo2 {
 						// 栈顶为数字时
 						st = String.valueOf(currentChar);
 						stack.push(st);
-						sb.append(st);
+//						sb.append(st);
 					} else {
 						handleAddAndSubtract("-");
 					}
@@ -108,7 +108,7 @@ public class Todo2 {
 						// 栈顶为数字时
 						st = String.valueOf(currentChar);
 						stack.push(st);
-						sb.append(st);
+//						sb.append(st);
 					} else {
 						handleMultiplyAndDivide("*");
 					}
@@ -119,7 +119,7 @@ public class Todo2 {
 						// 栈顶为数字时
 						st = String.valueOf(currentChar);
 						stack.push(st);
-						sb.append(st);
+//						sb.append(st);
 					} else {
 						handleMultiplyAndDivide("/");
 					}
@@ -135,7 +135,7 @@ public class Todo2 {
 
 		theOtherWayCount();
 		result = stack.peek();
-		System.out.println(sb.toString());
+//		System.out.println(sb.toString());
 		System.out.println(result);
 		return result;
 	}
@@ -162,7 +162,7 @@ public class Todo2 {
 			figureT = figureOne * figureTwo;
 			stack.push(String.valueOf(figureT));
 			stack.push(st);
-			sb.append(st);
+//			sb.append(st);
 			break;
 		case "/":
 			figureOne = Double.valueOf(stack.pop());
@@ -171,7 +171,7 @@ public class Todo2 {
 			System.out.println(figureT);
 			stack.push(String.valueOf(figureT));
 			stack.push(st);
-			sb.append(st);
+//			sb.append(st);
 			break;
 		}
 	}
@@ -209,6 +209,9 @@ public class Todo2 {
 	 * 进行最后的计算
 	 */
 	private void theOtherWayCount() {
+		while(!stack.isEmpty()){
+			System.err.println(stack.pop());
+		}
 		String st = stack.pop();
 		figureOne = Double.valueOf(stack.pop());
 		figureTwo = Double.valueOf(stack.pop());
